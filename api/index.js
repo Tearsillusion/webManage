@@ -35,7 +35,7 @@ const articleManageList = require("./main/articleManageList.js")
 const reviewArticle = require("./main/reviewArticle.js")
 
 module.exports = function useApp(){
-	const baseUrl = 'http://localhost:3000/'  
+	const baseUrl = 'http://101.43.228.243:3000/'  
 	app.all('*',function(req,res,next){
 		res.header("Access-Control-Allow-Origin","*");
 		res.header("Access-Control-Allow-Headers","X-Requested-With");
