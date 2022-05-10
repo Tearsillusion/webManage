@@ -4,7 +4,7 @@ LABEL version = "v1.0"
 USER root
 COPY . /app
 WORKDIR /app
-EXPOSE 3000
+EXPOSE 9001
 RUN npm install -g cnpm --registry=https://registry.npm.taobao.org
 RUN cnpm install
 CMD npm start
