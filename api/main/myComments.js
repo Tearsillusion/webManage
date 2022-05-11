@@ -4,7 +4,7 @@ const myComments = async (req,res,sqlMain,moment,baseUrl,selectUser) => {
 	
 	const {id} = await selectUser(req,res,sqlMain)
 	
-	const selectMyComments = await sqlMain.selectJoinSql('comments.id,comments.community_id,nickName,avatar,comments.create_time,comments.content,community.title','(community,user)','comments','comments.community_id','community.id  AND community.user_id = user.id','community.user_id = '+ id+' order by comments.id desc')
+	const selectMyComments = await sqlMain.selectJoinSql('comments.id,comments.community_id,nickName,avatar,comments.create_time,comments.content,community.title','(community,user)','comments','comments.community_id','community.id  AND comments.user_id = user.id','community.user_id = '+ id+' order by comments.id desc')
 	if(!selectMyComments){
 		res.send({
 			code: 400,

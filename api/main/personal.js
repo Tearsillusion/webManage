@@ -15,7 +15,7 @@ const personal = async (req,res,sqlMain,baseUrl,selectUser) => {
 		)
 		const {'count(1)':releaseCount} = selectReleaseCount[0] 
 		// 查询我的评论数量
-		const selectCommentsCount = await sqlMain.selectJoinSql('count(1)','(community,user)','comments','comments.community_id','community.id AND community.user_id = user.id','community.user_id = '+ id)
+		const selectCommentsCount = await sqlMain.selectJoinSql('count(1)','(community,user)','comments','comments.community_id','community.id AND comments.user_id = user.id','community.user_id = '+ id)
 		const {'count(1)':commentsCount} = selectCommentsCount[0]  
 		// 查询我的收藏数量
 		const selectCollectionCount = await sqlMain.selectJoinSql(
