@@ -4,7 +4,7 @@ const personal = async (req,res,sqlMain,baseUrl,selectUser) => {
 	// post params
 	// nickName 昵称
 	
-	const {id,avatar,nickName,account} = await selectUser(req,res,sqlMain)
+	const {id,avatar,nickName,account,user_type} = await selectUser(req,res,sqlMain)
 	
 	if(req.method === 'GET'){
 		// 查询我的发布数量
@@ -15,7 +15,7 @@ const personal = async (req,res,sqlMain,baseUrl,selectUser) => {
 		)
 		const {'count(1)':releaseCount} = selectReleaseCount[0] 
 		// 查询我的评论数量
-		const selectCommentsCount = await sqlMain.selectJoinSql('count(1)','(community,user)','comments','comments.community_id','community.id','user.id = '+ id)
+		const selectCommentsCount = await sqlMain.selectJoinSql('count(1)','(community,user)','comments','comments.community_id','community.id AND community.user_id = user.id','community.user_id = '+ id)
 		const {'count(1)':commentsCount} = selectCommentsCount[0]  
 		// 查询我的收藏数量
 		const selectCollectionCount = await sqlMain.selectJoinSql(
@@ -31,6 +31,7 @@ const personal = async (req,res,sqlMain,baseUrl,selectUser) => {
 				avatar:avatar?baseUrl+'avatar/'+avatar:avatar,
 				nickName:nickName,
 				account:account,
+				user_type:user_type,
 				releaseCount:releaseCount,
 				commentsCount:commentsCount,
 				collectionCount:collectionCount
